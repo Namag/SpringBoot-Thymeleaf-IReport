@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org"
+	layout:decorate="~{fragments/layout}">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width" />
+
+<title>ALanPontoInfo</title>
+
+<link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"
+	type="text/css" rel="stylesheet" />
+<link th:href="@{/webjars/bootstrap/css/bootstrap-theme.min.css}"
+	type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/stylesheets/lista-produtos.css}" />
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</head>
+
+<body style="background-color: gray">
+<div layout:fragment="content" th:remove="tag">
+	<div class="panel panel-default" style="margin: 20px">
+
+		<div class="panel-heading" style="margin: 20px">
+			<h1 class="panel-title" style="margin: 20px">Atualizar produtos</h1>
+		</div>
+
+		<div class="panel-body">
+
+			<form method="POST" th:object="${produto}"
+				th:action="@{/produtos/novo}" style="margin: 10px 0">
+				
+				<input type="hidden" th:field="*{id}" />
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="Nome" th:field="*{nome}" />
+                      <input type="text" class="form-control" placeholder="Marca" th:field="*{marca}" />
+						 <input type="text" class="form-control" placeholder="Modelo" th:field="*{modelo}" />
+					<input type="number" class="form-control" th:max="99999999999999999999" placeholder="Quantidade" th:field="*{quantidade}"
+						  th:required="required" th:class="${#fields.hasErrors('quantidade')}? fieldError"/>
+					<!-- <input type="text" class="form-control" placeholder="Descricao" th:field="*{descricao}"/>-->
+					<input type="number" class="form-control" th:max="99999999999999999999" placeholder="Valor" th:field="*{valor}" 
+					th:required ="required"  th:class="${#fields.hasErrors('valor')}? fieldError" />
+					
+					<button type="submit" class="btn btn-primary">Atualizar</button>
+
+				</div>
+			</form>
+		</div>
+	</div>
+	</div>
+</body>
+</html>

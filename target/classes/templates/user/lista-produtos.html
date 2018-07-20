@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org"
+	layout:decorate="~{fragments/layout}">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width" />
+
+
+
+<title>ALanPontoInfo</title>
+
+<link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"
+	type="text/css" rel="stylesheet" />
+<link th:href="@{/webjars/bootstrap/css/bootstrap-theme.min.css}"
+	type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/stylesheets/css/lista-produtos.css}" />
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+
+</head>
+
+<body style="background-color: gray">
+	<div layout:fragment="content" th:remove="tag">
+		<div class="panel panel-default" style="margin: 20px">
+
+			<div class="panel-heading" style="margin: 10px">
+				<h1 class="panel-title" style="margin: 10px">Cadastro de
+					produtos</h1>
+			</div>
+
+			<div class="panel-body">
+				
+				<form method="POST" th:object="${produto}" th:action="@{/produtos/novo}"
+					style="margin: 20px 0">
+					
+					<input type="hidden" th:field="*{id}" />
+					<div class="form-group">
+				
+						<input type="text" class="form-control" placeholder="Nome"
+							th:field="*{nome}" th:required="required" /> <input type="text"
+							class="form-control" placeholder="Marca" th:field="*{marca}"
+							th:required="required" /> <input type="text"
+							class="form-control" placeholder="Modelo" th:field="*{modelo}"
+							th:required="required" /> <input type="number"
+							class="form-control" th:max="99999999999999999999"
+							placeholder="Quantidade" th:field="*{quantidade}"
+							th:required="required"
+							th:class="${#fields.hasErrors('quantidade')}? fieldError" />
+						<!-- <input type="text" class="form-control" placeholder="Descricao" th:field="*{descricao}"/>-->
+						<input type="number" class="form-control"
+							th:max="99999999999999999999" placeholder="Valor"
+							th:field="*{valor}" th:required="required"
+							th:class="${#fields.hasErrors('valor')}? fieldError" />
+						<div class="form-group" style="margin-left: 10px">
+							<button class="btn  btn-primary" type="submit"
+								style="margin: 20px 0">Adicionar</button>
+						</div>
+					</div>
+
+				</form>
+
+
+
+				<div class="panel panel-default panel-heading"
+					style="margin: 10px; background-color: #dbdfef">
+					<h1 class="panel-title" style="margin: 10px">Lista de produtos</h1>
+				</div>
+
+				
+					<div class="alert  alert-success"
+						th:if="${!#strings.isEmpty(mensagem)}">
+						<i class="fa fa-check-circle"></i> <span th:text="${mensagem}">Mensagem
+							sucesso!</span>
+					</div>
+
+					<br />
+					
+					<div class="container-fluid">
+					<div class="table-responsive ">
+
+						<form class="button" th:action="@{/produtos/pdf.html}"
+							method="get">
+							<input type="submit" value="Gerar PDF" class="btn btn-primary" />
+						</form>
+
+						<br />
+						<table class="table table-hover table-striped">
+							<thead>
+								<tr>
+									<th class="av-table-produtos-col-nome">Codigo</th>
+									<th class="av-table-produtos-col-nome">Nome</th>
+
+									<th class="av-table-produtos-col-marca">Marca</th>
+									<th class="av-table-produtos-col-modelo">Modelo</th>
+									<th class="av-table-produtos-col-quantidade">Quantidade</th>
+									<!-- <th class="av-table-produtos-col-descricao">Descricao</th>-->
+									<th class="av-table-produtos-col-valor">Valor</th>
+									<th class="av-table-produtos-col-icons"></th>
+
+								</tr>
+
+							</thead>
+
+							<tbody>
+								<tr th:each="produto : ${produtos}">
+									<td th:text="${produto.id}">1</td>
+									<td><a th:href="@{/produtos/{id}(id=${produto.id})}"
+										th:text="${produto.nome}"> Note book</a></td>
+									<td th:text="${produto.marca}">dell</td>
+									<td th:text="${produto.modelo}">inspiron</td>
+									<td th:text="${produto.quantidade}">2</td>
+									<!-- <td th:text="${produto.descricao}" > inte i7 </td>-->
+									<td
+										th:text="${#numbers.formatDecimal(produto.valor, 0, 'COMMA', 2, 'POINT')}">3.000</td>
+
+									<td class="text-center">
+										<form method="POST"
+											th:onsubmit="'return confirm(\'Posso remover ' + ${produto.nome} + '?\');'"
+											th:action="@{/produtos/{id}(id=${produto.id})}">
+											<input type="hidden" name="_method" value="DELETE" />
+											<button type="submit" class="btn btn-danger btn-xs">
+												<span class="fa fa-trash"></span>
+											</button>
+										</form>
+
+									</td>
+								</tr>
+								<tr th:if="${produtos.empty}">
+									<td colspan="5">Nenhum produto cadastrado</td>
+								</tr>
+
+							</tbody>
+
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

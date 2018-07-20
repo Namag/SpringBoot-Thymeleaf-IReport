@@ -1,0 +1,3 @@
+insert into produto (id, nome, quantidade, marca, modelo, descricao, valor) values (1, 'Placa mae', 2, 'Gigabyte', 'h370hd3', 'Core i7 processors', 300.00);
+insert into produto (id, nome, quantidade, marca, modelo, descricao, valor) values (2, 'Monitor', 2, 'Samsung','15 pol', 'Tela led preto', 350.00);
+insert into produto (id, nome, quantidade, marca, modelo, descricao, valor) values (3, 'Memoria', 3,'KIngston', 'ddr4', 'memoria ddr4 8gb', 300.00);

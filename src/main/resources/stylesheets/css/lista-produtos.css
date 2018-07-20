@@ -1,0 +1,26 @@
+.av-table-produtos-col-codigo, .av-table-produtos-col-icons {
+	width: 60px;
+	text-align: center;
+}
+
+.av-table-produtos-col-nome{
+width:160px;
+}
+.av-table-produos-col-quantidade {
+	width: 60px;
+}
+.av-table-produos-col-marca {
+	width: 120px;
+}
+.av-table-produtos-col-modelo {
+	width: 160px;
+	text-align: right;
+}
+.av-table-produtos-col-descricao {
+	width: 160px;
+	text-align: right;
+}
+.av-table-produtos-col-valor {
+	width: 120px;
+	text-align: right;
+}

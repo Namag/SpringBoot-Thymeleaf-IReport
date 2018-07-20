@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<webflow-project-description>
+	<version>1</version>
+	<pluginVersion><![CDATA[3.9.2.201712210913-RELEASE]]></pluginVersion>
+	<configs>
+		<config>
+			<file>src/main/resources/WEB-INF/web.xml</file>
+			<name><![CDATA[web]]></name>
+			<beans-config><![CDATA[1:BeansModel|2:gestao-produtos|3:java:br.com.alpi.estoque.GestaoProdutosApplication]]></beans-config>
+			<beans-config><![CDATA[1:BeansModel|2:gestao-produtos|3:src/main/resources/META-INF/application-context.xml]]></beans-config>
+		</config>
+	</configs>
+</webflow-project-description>
